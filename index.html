@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shadow Ring</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="app">
+      <canvas id="game-canvas" aria-label="Shadow Ring game canvas"></canvas>
+
+      <div id="camera-preview" class="camera-preview">
+        <video id="webcam" autoplay muted playsinline></video>
+        <div id="tracker-status" class="tracker-status">Camera idle</div>
+      </div>
+
+      <section id="start-menu" class="overlay-panel start-panel">
+        <p class="eyebrow">Shadow Ring</p>
+        <h1>Boxing</h1>
+
+        <div class="picker-block">
+          <label>Body</label>
+          <div class="swatch-row" data-picker="body">
+            <button class="swatch is-selected" type="button" data-color="#2f80ed" style="--swatch: #2f80ed" aria-label="Blue body"></button>
+            <button class="swatch" type="button" data-color="#ef4444" style="--swatch: #ef4444" aria-label="Red body"></button>
+            <button class="swatch" type="button" data-color="#22c55e" style="--swatch: #22c55e" aria-label="Green body"></button>
+            <button class="swatch" type="button" data-color="#f59e0b" style="--swatch: #f59e0b" aria-label="Amber body"></button>
+          </div>
+        </div>
+
+        <div class="picker-block">
+          <label>Fists</label>
+          <div class="swatch-row" data-picker="fists">
+            <button class="swatch is-selected" type="button" data-color="#67e8f9" style="--swatch: #67e8f9" aria-label="Cyan fists"></button>
+            <button class="swatch" type="button" data-color="#fca5a5" style="--swatch: #fca5a5" aria-label="Rose fists"></button>
+            <button class="swatch" type="button" data-color="#fde047" style="--swatch: #fde047" aria-label="Yellow fists"></button>
+            <button class="swatch" type="button" data-color="#c4b5fd" style="--swatch: #c4b5fd" aria-label="Violet fists"></button>
+          </div>
+        </div>
+
+        <button id="start-button" class="primary-button" type="button">Start</button>
+      </section>
+
+      <section id="calibration-panel" class="overlay-panel calibration-panel" hidden>
+        <p class="eyebrow">Calibration</p>
+        <h2 id="calibration-title">Guard</h2>
+        <p id="calibration-copy">Hold both fists in front of your face.</p>
+        <div class="progress-track" aria-hidden="true">
+          <div id="calibration-progress" class="progress-fill"></div>
+        </div>
+        <button id="calibration-reset" class="secondary-button" type="button">Restart</button>
+      </section>
+
+      <section id="hud" class="hud" hidden>
+        <div class="bar-stack">
+          <div class="bar-label">
+            <span>You</span>
+            <span id="player-health-text">100</span>
+          </div>
+          <div class="meter">
+            <div id="player-health-bar" class="meter-fill player-meter"></div>
+          </div>
+        </div>
+
+        <div id="combat-cue" class="combat-cue">Ready</div>
+
+        <div class="bar-stack">
+          <div class="bar-label">
+            <span>Opponent</span>
+            <span id="opponent-health-text">100</span>
+          </div>
+          <div class="meter">
+            <div id="opponent-health-bar" class="meter-fill opponent-meter"></div>
+          </div>
+        </div>
+
+        <div class="score-strip">
+          <span>Score <strong id="score-value">0</strong></span>
+          <span>Combo <strong id="combo-value">0</strong></span>
+        </div>
+
+        <div id="end-actions" class="end-actions" hidden>
+          <button id="rematch-button" class="primary-button compact" type="button">Rematch</button>
+          <button id="recalibrate-button" class="secondary-button compact" type="button">Calibrate</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
